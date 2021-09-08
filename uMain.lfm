@@ -1,0 +1,248 @@
+object frmMain: TfrmMain
+  Left = 272
+  Height = 320
+  Top = 182
+  Width = 480
+  Caption = 'Path Collector'
+  ClientHeight = 300
+  ClientWidth = 480
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -13
+  Font.Name = 'Tahoma'
+  Menu = mm1
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnWindowStateChange = FormWindowStateChange
+  LCLVersion = '2.0.12.0'
+  object lbl1: TLabel
+    Left = 16
+    Height = 16
+    Top = 16
+    Width = 59
+    Caption = 'Output file'
+    ParentColor = False
+  end
+  object lblLineCount: TLabel
+    Left = 347
+    Height = 16
+    Top = 16
+    Width = 38
+    Alignment = taRightJustify
+    Anchors = [akTop, akRight]
+    Caption = '0 lines'
+    Font.Color = clSilver
+    Font.Height = -13
+    Font.Name = 'Conso'
+    ParentColor = False
+    ParentFont = False
+  end
+  object pnlDrop: TPanel
+    Left = 16
+    Height = 212
+    Top = 72
+    Width = 448
+    Align = alBottom
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Around = 16
+    BevelInner = bvLowered
+    Caption = 'DRAG AND DROP HERE'
+    Font.Color = clSilver
+    Font.Height = -27
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 0
+  end
+  object edtOutputPath: TEdit
+    Left = 16
+    Height = 24
+    Top = 32
+    Width = 369
+    Anchors = [akTop, akLeft, akRight]
+    OnExit = edtOutputPathExit
+    TabOrder = 1
+  end
+  object btnSelectOutput2: TButton
+    Left = 392
+    Height = 25
+    Top = 32
+    Width = 48
+    Anchors = [akTop, akRight]
+    Caption = '. . .'
+    OnClick = btnSelectOutputClick
+    TabOrder = 2
+  end
+  object btnFileActions: TButton
+    Left = 440
+    Height = 25
+    Top = 32
+    Width = 25
+    Anchors = [akTop, akRight]
+    Caption = '̬'
+    OnClick = btnFileActionsClick
+    TabOrder = 3
+  end
+  object mm1: TMainMenu
+    Left = 96
+    Top = 8
+    object File1: TMenuItem
+      Caption = 'File'
+      object btnSelectoutput: TMenuItem
+        Caption = 'Select output'
+        ShortCut = 16467
+        OnClick = btnSelectOutputClick
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object btnExit: TMenuItem
+        Caption = 'Exit'
+        ShortCut = 32883
+        OnClick = btnExitClick
+      end
+    end
+    object Settings1: TMenuItem
+      Caption = 'Settings'
+      object MenuItem2: TMenuItem
+        Caption = 'Collect'
+        object chkCollectAll: TMenuItem
+          AutoCheck = True
+          Caption = 'All'
+          GroupIndex = 1
+          RadioItem = True
+        end
+        object chkCollectDirectories: TMenuItem
+          AutoCheck = True
+          Caption = 'Directories'
+          GroupIndex = 1
+          RadioItem = True
+        end
+        object chkCollectFiles: TMenuItem
+          AutoCheck = True
+          Caption = 'Files'
+          GroupIndex = 1
+          RadioItem = True
+        end
+        object MenuItem3: TMenuItem
+          Caption = '-'
+        end
+        object chkRecurseDirectories: TMenuItem
+          AutoCheck = True
+          Caption = 'Recurse directories'
+        end
+        object chkSkipDuplicates: TMenuItem
+          AutoCheck = True
+          Caption = 'Skip duplicates'
+        end
+      end
+      object MenuItem1: TMenuItem
+        Caption = 'Input'
+        object chkClipboard: TMenuItem
+          AutoCheck = True
+          Caption = 'Clipboard'
+        end
+        object chkSendTo: TMenuItem
+          AutoCheck = True
+          Caption = 'Send to'
+          OnClick = chkSendToClick
+        end
+      end
+      object Output1: TMenuItem
+        Caption = 'Output'
+        object chkOutputAppend: TMenuItem
+          AutoCheck = True
+          Caption = 'Append'
+          GroupIndex = 1
+          RadioItem = True
+        end
+        object chkOutputTruncate: TMenuItem
+          AutoCheck = True
+          Caption = 'Truncate'
+          GroupIndex = 1
+          RadioItem = True
+        end
+      end
+      object Window1: TMenuItem
+        Caption = 'Window'
+        object chkAlwaysOnTop: TMenuItem
+          AutoCheck = True
+          Caption = 'Always on top'
+          OnClick = chkAlwaysOnTopClick
+        end
+        object chkMinimizeToTray: TMenuItem
+          AutoCheck = True
+          Caption = 'Minimize to tray'
+        end
+      end
+    end
+    object Help1: TMenuItem
+      Caption = 'Help'
+      object btnDonationCoder: TMenuItem
+        Caption = 'Donation Coder'
+        OnClick = btnDonationCoderClick
+      end
+      object btnGithub: TMenuItem
+        Caption = 'Github'
+        OnClick = btnGithubClick
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object btnAbout: TMenuItem
+        Caption = 'About'
+        OnClick = btnAboutClick
+      end
+    end
+  end
+  object TrayIcon1: TTrayIcon
+    BalloonFlags = bfInfo
+    BalloonTitle = 'Path Collector'
+    PopUpMenu = pmTray
+    Hint = 'Path Collector'
+    Visible = True
+    OnDblClick = btnShowClick
+    Left = 254
+    Top = 6
+  end
+  object SaveDialog1: TSaveDialog
+    Title = 'Save output to'
+    DefaultExt = '.txt'
+    Filter = 'Text files (*.txt)|*.txt|All files(*.*)|*.*'
+    Left = 289
+    Top = 5
+  end
+  object pmFile: TPopupMenu
+    Left = 244
+    Top = 63
+    object btnOpenFile: TMenuItem
+      Caption = 'Open'
+      OnClick = btnOpenFileClick
+    end
+    object btnTruncate: TMenuItem
+      Caption = 'Truncate'
+      OnClick = btnTruncateClick
+    end
+  end
+  object pmTray: TPopupMenu
+    Left = 144
+    Top = 110
+    object btnShow: TMenuItem
+      Caption = 'Show'
+      Default = True
+      OnClick = btnShowClick
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-'
+    end
+    object btnExit2: TMenuItem
+      Caption = 'Exit'
+      OnClick = btnExitClick
+    end
+  end
+  object ApplicationProperties1: TApplicationProperties
+    OnDeactivate = ApplicationProperties1Deactivate
+    Left = 238
+    Top = 118
+  end
+end
